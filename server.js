@@ -15,7 +15,10 @@ app.listen(8080, function() {
 });
 
 app.get('/api/notes', (req, res) => {
-    res.json(data);
+    const searchTerm = req.query.searchTerm;
+    if(!searchTerm) {
+        res.json(data);
+    } else res.json(data.filter(note => note.id == searchTerm));
 });
 
 app.get('/api/notes/:id', (req, res) => {
